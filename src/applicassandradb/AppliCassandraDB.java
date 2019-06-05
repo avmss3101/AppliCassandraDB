@@ -19,23 +19,23 @@ public class AppliCassandraDB {
         Cluster cluster;
         Session session;
         cluster = Cluster.builder().addContactPoint("localhost").build();
-        session = cluster.connect("teste");
+        session = cluster.connect("trabalho_bd");
         //session.execute("insert");
-        String catid = null, pdtid = null, pdtname = null, sa = null;
-        float price = 0;
+        String titulo, titulo_original;
+        int id, ano, qtd_visualizacao, duracao_min, censura;
+        float nota;
         ResultSet results = session.execute("select * from products");
         for (Row row : results) {
-            pdtid = Integer.toString(row.getInt("pdt_id"));
-            catid = Integer.toString(row.getInt("cat_id"));
-            pdtname = row.getString("pdt_name");
-            price = row.getFloat("price");
-            sa = row.getString("shippingaddress");
+            titulo = row.getString("titulo");
+            titulo_original = row.getString("titulo_original");
+            id = row.getInt("id");
+            ano = row.getInt("ano");
+            qtd_visualizacao = row.getInt("qtd_visualizacao");
+            duracao_min = row.getInt("duracao_min");
+            censura = row.getInt("censura");
+            nota = row.getFloat("nota");
             
-            System.out.println("PDTid: " + pdtid);
-            System.out.println("Name" + pdtname);
-            System.out.println("CatID" + catid);
-            System.out.println("Preco: " + price);
-            System.out.println("SA: " + sa);
+            
         }
         cluster.close();
   }
